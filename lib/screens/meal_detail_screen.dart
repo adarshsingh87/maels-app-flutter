@@ -5,6 +5,11 @@ import '../dummy_data.dart';
 class MealDetailScreen extends StatelessWidget {
   static const routeName = '/meal-detail';
 
+  final Function favMeal;
+  final Function isFav;
+
+  MealDetailScreen(this.favMeal, this.isFav);
+
   Widget buildSectionTitle(String text, BuildContext context) {
     return Container(
       child: Text(
@@ -88,9 +93,9 @@ class MealDetailScreen extends StatelessWidget {
           ],
         )),
         floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.delete_outline),
+          child: Icon(isFav(mealId) ? Icons.star : Icons.star_border),
           onPressed: () {
-            Navigator.of(context).pop(mealId);
+            favMeal(mealId);
           },
         ));
   }
