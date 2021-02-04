@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../screens/meal_detail_screen.dart';
 import '../models/meal.dart';
 
@@ -9,13 +10,15 @@ class MealsItem extends StatelessWidget {
   final int duration;
   final Complexity complexity;
   final Affordability affordability;
+  final Function removeItem;
   const MealsItem(
       {@required this.id,
       @required this.imageUrl,
       @required this.title,
       @required this.affordability,
       @required this.complexity,
-      @required this.duration});
+      @required this.duration,
+      @required this.removeItem});
 
   String get complexityText {
     switch (complexity) {
@@ -50,7 +53,12 @@ class MealsItem extends StatelessWidget {
   }
 
   void selectItem(BuildContext context) {
-    Navigator.of(context).pushNamed(MealDetailScreen.routeName, arguments: {'id': id});
+    Navigator.of(context).pushNamed(MealDetailScreen.routeName,
+        arguments: {'id': id}).then((result) {
+      if (result != null) {
+        removeItem(result);
+      }
+    });
   }
 
   @override
