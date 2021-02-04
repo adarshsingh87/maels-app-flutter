@@ -1,6 +1,6 @@
 # meals_app
 
-A new Flutter project.
+second Flutter project.
 
 ## Getting Started
 
